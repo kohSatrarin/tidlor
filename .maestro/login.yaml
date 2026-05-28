@@ -1,0 +1,41 @@
+appId: com.smartcare.app
+---
+# Login Flow E2E Test
+
+- launchApp:
+    clearState: true
+
+# 1. Verify we land on the login screen
+- assertVisible: "Smart Care System"
+
+# 2. Invalid input — button should remain disabled
+- tapOn:
+    id: "credential-input"
+- inputText: "123abc"
+- assertNotVisible:
+    id: "login-button"
+    enabled: true
+# The submit button stays disabled for non-numeric/wrong-length input
+
+# 3. Clear and enter invalid numeric (9 digits — too short for phone)
+- clearText:
+    id: "credential-input"
+- tapOn:
+    id: "credential-input"
+- inputText: "123456789"
+- assertVisible:
+    id: "login-button"
+    disabled: true
+
+# 4. Enter valid 13-digit National ID and submit
+- clearText:
+    id: "credential-input"
+- tapOn:
+    id: "credential-input"
+- inputText: "1234567890123"
+- tapOn:
+    id: "login-button"
+
+# 5. Verify navigation to Main screen (loading spinner appears briefly then resolves)
+- waitForAnimationToEnd
+- assertVisible: "Smart Care"

@@ -1,0 +1,40 @@
+appId: com.smartcare.app
+---
+# Search Request Flow E2E Test
+# Precondition: user is logged in, seed data is loaded (5 seed items present)
+
+- launchApp
+
+# Verify on Main screen with seed data loaded
+- assertVisible: "Smart Care"
+- assertVisible: "Air conditioning not working in Room 301"
+
+# --- Scenario 1: Search with invalid / non-existent ID ---
+
+- tapOn:
+    id: "main-search-input"
+- inputText: "sc-does-not-exist"
+- tapOn:
+    id: "main-search-button"
+
+# Should show error message (stays on Main screen)
+- assertVisible:
+    id: "search-error"
+- assertVisible: "No Smart Care request found with ID"
+
+# --- Scenario 2: Search with a valid seeded ID ---
+
+- clearText:
+    id: "main-search-input"
+- tapOn:
+    id: "main-search-input"
+- inputText: "sc-seed-003"
+- tapOn:
+    id: "main-search-button"
+
+# Should navigate to Request Detail screen
+- waitForAnimationToEnd
+- assertVisible: "Request Detail"
+- assertVisible:
+    id: "detail-id"
+- assertVisible: "sc-seed-003"

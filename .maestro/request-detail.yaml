@@ -1,0 +1,36 @@
+appId: com.smartcare.app
+---
+# Request Detail Flow E2E Test
+# Precondition: user is logged in, seed data is loaded
+
+- launchApp
+
+# Verify on Main screen
+- assertVisible: "Smart Care"
+
+# Tap the first request card (seed item 1)
+- tapOn:
+    id: "request-card-sc-seed-001"
+
+# Should navigate to Request Detail screen
+- waitForAnimationToEnd
+- assertVisible: "Request Detail"
+
+# Verify all detail fields are rendered
+- assertVisible:
+    id: "detail-id"
+- assertVisible: "sc-seed-001"
+
+- assertVisible:
+    id: "detail-title"
+- assertVisible: "Air conditioning not working in Room 301"
+
+- assertVisible:
+    id: "detail-description"
+- assertVisible: "The AC unit in meeting room 301"
+
+# Verify timestamp is formatted (not raw ISO string)
+- assertVisible:
+    id: "detail-created"
+# Formatted date contains "May" or a localized date — not the raw ISO "T" separator
+- assertNotVisible: "2026-05-26T08:30:00.000Z"
