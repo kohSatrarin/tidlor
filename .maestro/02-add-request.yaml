@@ -38,6 +38,7 @@ appId: com.smartcare.app
     id: "submit-button"
 
 # 7. Should navigate back to Main screen
+- waitForAnimationToEnd
 - assertVisible: "Smart Care"
 
 # 8. New request card should appear at the top of the list

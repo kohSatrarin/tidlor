@@ -4,7 +4,7 @@ export const mockSeedData: SmartCare[] = [
   {
     id: 'sc-seed-001',
     title: 'Air conditioning not working in Room 301',
-    description: 'The AC unit in meeting room 301 has been making noise and blowing warm air since Monday morning. Please send maintenance ASAP.',
+    description: 'The AC unit in meeting room 301',
     createdAt: '2026-05-26T08:30:00.000Z',
   },
   {

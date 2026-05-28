@@ -17,6 +17,7 @@ export function RequestCard({ item, onPress, testID }: RequestCardProps) {
     <TouchableOpacity
       onPress={() => onPress(item.id)}
       accessibilityRole="button"
+      accessibilityLabel={item.title}
       testID={testID}
       style={[
         styles.card,
