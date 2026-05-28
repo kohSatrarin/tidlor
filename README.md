@@ -33,10 +33,10 @@ npm install
 # Start Expo dev server (scan QR with Expo Go)
 npm start
 
-# Open on iOS simulator
+# Build and run on iOS simulator (requires Xcode)
 npm run ios
 
-# Open on Android emulator
+# Build and run on Android emulator (requires Android Studio)
 npm run android
 ```
 
@@ -47,8 +47,8 @@ npm run android
 | Script | Description |
 |--------|-------------|
 | `npm start` | Start Expo dev server |
-| `npm run ios` | Launch on iOS simulator |
-| `npm run android` | Launch on Android emulator |
+| `npm run ios` | Native build + run on iOS simulator (requires Xcode) |
+| `npm run android` | Native build + run on Android emulator (requires Android Studio) |
 | `npm test` | Run Jest unit tests |
 | `npm run test:watch` | Run Jest in watch mode |
 | `npm run test:coverage` | Run Jest with coverage report |
@@ -128,11 +128,13 @@ tidlor/
 │   ├── store/
 │   └── validation/
 │
-└── .maestro/                      # Maestro E2E flows
-    ├── login.yaml
-    ├── add-request.yaml
-    ├── search-request.yaml
-    └── request-detail.yaml
+├── ios/                           # Generated native iOS project (bare workflow)
+│
+└── .maestro/                      # Maestro E2E flows (run in order)
+    ├── 01-login.yaml
+    ├── 02-add-request.yaml
+    ├── 03-request-detail.yaml
+    └── 04-search-request.yaml
 ```
 
 ---
@@ -238,17 +240,17 @@ brew install maestro   # macOS
 maestro test .maestro/
 
 # Run a single flow
-maestro test .maestro/login.yaml
+maestro test .maestro/01-login.yaml
 ```
 
 **E2E flows:**
 
 | Flow | File | What it tests |
 |------|------|--------------|
-| Login | `login.yaml` | Invalid input stays disabled → valid ID submits → navigates to Main |
-| Add Request | `add-request.yaml` | Empty form disabled → fill fields → submit → new card appears |
-| Search | `search-request.yaml` | Bad ID shows error → valid seed ID navigates to detail |
-| Request Detail | `request-detail.yaml` | Tapping card shows ID, title, description, formatted date |
+| Login | `01-login.yaml` | Invalid input stays disabled → valid ID submits → navigates to Main |
+| Add Request | `02-add-request.yaml` | Empty form disabled → fill fields → submit → new card appears |
+| Request Detail | `03-request-detail.yaml` | Tapping card shows ID, title, description, formatted date |
+| Search | `04-search-request.yaml` | Bad ID shows error → valid seed ID navigates to detail |
 
 ---
 
