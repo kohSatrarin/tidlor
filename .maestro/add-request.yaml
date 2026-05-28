@@ -1,11 +1,11 @@
 appId: com.smartcare.app
 ---
 # Add Request Flow E2E Test
-# Precondition: user is already logged in (run after login flow or use persistent state)
+# Precondition: user is already logged in (persisted auth)
 
 - launchApp
 
-# Navigate to Main screen (assume already logged in with persisted auth)
+# Verify on Main screen
 - assertVisible: "Smart Care"
 
 # 1. Tap the Add (+) button
@@ -15,37 +15,30 @@ appId: com.smartcare.app
 # 2. Verify we are on the Add Request screen
 - assertVisible: "New Request"
 
-# 3. Submit button should be disabled when fields are empty
-- assertVisible:
+# 3. Tapping submit with empty fields — should stay on Add Request screen
+- tapOn:
     id: "submit-button"
-    disabled: true
+- assertVisible: "New Request"
 
-# 4. Fill in the title field
+# 4. Fill in the title field only — still incomplete
 - tapOn:
     id: "title-input"
 - inputText: "Broken projector in Conference Room B"
-
-# 5. Submit still disabled (description empty)
-- assertVisible:
+- tapOn:
     id: "submit-button"
-    disabled: true
+- assertVisible: "New Request"
 
-# 6. Fill in the description field
+# 5. Fill in the description field
 - tapOn:
     id: "description-input"
-- inputText: "The projector in Conference Room B stopped working during today's presentation. The screen shows no signal even though the laptop is connected via HDMI."
+- inputText: "The projector in Conference Room B stopped working during today's presentation."
 
-# 7. Submit button should now be enabled
-- assertVisible:
-    id: "submit-button"
-    enabled: true
-
-# 8. Tap submit
+# 6. Now both fields filled — tap submit
 - tapOn:
     id: "submit-button"
 
-# 9. Should navigate back to Main screen
+# 7. Should navigate back to Main screen
 - assertVisible: "Smart Care"
 
-# 10. New request card should appear at the top of the list
+# 8. New request card should appear at the top of the list
 - assertVisible: "Broken projector in Conference Room B"

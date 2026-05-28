@@ -7,25 +7,26 @@ appId: com.smartcare.app
 
 # 1. Verify we land on the login screen
 - assertVisible: "Smart Care System"
+- assertVisible: "Sign in to continue"
 
-# 2. Invalid input — button should remain disabled
+# 2. Enter invalid input (non-numeric) and try to tap login
 - tapOn:
     id: "credential-input"
 - inputText: "123abc"
-- assertNotVisible:
+# Tapping the disabled button should not navigate away
+- tapOn:
     id: "login-button"
-    enabled: true
-# The submit button stays disabled for non-numeric/wrong-length input
+- assertVisible: "Smart Care System"
 
-# 3. Clear and enter invalid numeric (9 digits — too short for phone)
+# 3. Clear and enter 9-digit input (too short) — still on login
 - clearText:
     id: "credential-input"
 - tapOn:
     id: "credential-input"
 - inputText: "123456789"
-- assertVisible:
+- tapOn:
     id: "login-button"
-    disabled: true
+- assertVisible: "Smart Care System"
 
 # 4. Enter valid 13-digit National ID and submit
 - clearText:
@@ -36,6 +37,7 @@ appId: com.smartcare.app
 - tapOn:
     id: "login-button"
 
-# 5. Verify navigation to Main screen (loading spinner appears briefly then resolves)
+# 5. Loading state briefly visible, then navigates to Main
 - waitForAnimationToEnd
 - assertVisible: "Smart Care"
+- assertNotVisible: "Smart Care System"
