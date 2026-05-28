@@ -1,13 +1,28 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import rootReducer from './rootReducer';
 
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage: AsyncStorage,
+  whitelist: ['auth', 'smartCare'],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // will be configured with persist ignore list in Task 10
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
     }),
 });
+
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export default store;
