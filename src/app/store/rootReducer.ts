@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import smartCareReducer from '@/features/smartCare/store/smartCareSlice';
+import authReducer from '@/features/auth/store/authSlice';
 
-// auth reducer will be added in Task 4
 const rootReducer = combineReducers({
   smartCare: smartCareReducer,
-  // auth: authReducer,  // Task 4
+  auth: authReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
