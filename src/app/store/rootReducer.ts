@@ -1,9 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import smartCareReducer from '@/features/smartCare/store/smartCareSlice';
 
-// Slices will be added by Tasks 3 and 4
+// auth reducer will be added in Task 4
 const rootReducer = combineReducers({
-  // auth: authReducer,      // Task 4
-  // smartCare: smartCareReducer, // Task 3
+  smartCare: smartCareReducer,
+  // auth: authReducer,  // Task 4
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

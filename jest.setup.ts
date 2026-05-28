@@ -1,5 +1,3 @@
-import '@testing-library/jest-native/extend-expect';
-
 // Mock react-native-get-random-values
 jest.mock('react-native-get-random-values', () => ({}));
 

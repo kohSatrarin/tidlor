@@ -8,7 +8,8 @@
       "@/*": ["src/*"]
     },
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": false
+    "exactOptionalPropertyTypes": false,
+    "types": ["jest"]
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.d.ts", "expo-env.d.ts"],
   "exclude": ["jest.setup.ts", "jest.config.js", "node_modules"]
