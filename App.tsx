@@ -27,16 +27,16 @@ function AppSeed({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={<LoadingSpinner size="large" />} persistor={persistor}>
-        <ThemeProvider>
+      <ThemeProvider>
+        <PersistGate loading={<LoadingSpinner size="large" />} persistor={persistor}>
           <AppSeed>
             <NavigationContainer>
               <StatusBar style="auto" />
               <RootNavigator />
             </NavigationContainer>
           </AppSeed>
-        </ThemeProvider>
-      </PersistGate>
+        </PersistGate>
+      </ThemeProvider>
     </Provider>
   );
 }
