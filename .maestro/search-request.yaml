@@ -22,10 +22,9 @@ appId: com.smartcare.app
 - assertVisible: "Smart Care"
 
 # --- Scenario 2: Search with valid seeded ID ---
-- clearText:
-    id: "main-search-input"
 - tapOn:
     id: "main-search-input"
+- eraseText: 30
 - inputText: "sc-seed-003"
 - tapOn:
     id: "main-search-button"

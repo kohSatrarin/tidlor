@@ -19,20 +19,18 @@ appId: com.smartcare.app
 - assertVisible: "Smart Care System"
 
 # 3. Clear and enter 9-digit input (too short) — still on login
-- clearText:
-    id: "credential-input"
 - tapOn:
     id: "credential-input"
+- eraseText: 20
 - inputText: "123456789"
 - tapOn:
     id: "login-button"
 - assertVisible: "Smart Care System"
 
 # 4. Enter valid 13-digit National ID and submit
-- clearText:
-    id: "credential-input"
 - tapOn:
     id: "credential-input"
+- eraseText: 20
 - inputText: "1234567890123"
 - tapOn:
     id: "login-button"
